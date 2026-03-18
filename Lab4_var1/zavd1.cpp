@@ -7,11 +7,12 @@
 using namespace std;
 
 struct Student {
-    string NAME, GROUP;
-    int SES[5];
+    string NAME;
+    string GROUP;
+    int SES[5]{};
 };
 
-double getAVG(const Student& s) {
+double getAVG(const Student &s) {
     double sum = 0;
     for (int i = 0; i < 5; i++) {
         sum += s.SES[i];
@@ -44,16 +45,15 @@ void printGoodStudents(Student arr[], int n) {
     cout << "\n";
 }
 
+//remake
 void printVowelStudents(Student arr[], int n) {
     cout << "=== Students whose surnames start with vowels ===\n";
     string vowels = "AEIOUY";
     bool found = false;
     for (int i = 0; i < n; i++) {
-        if (!arr[i].NAME.empty()) {
-            if (vowels.find(toupper(arr[i].NAME[0])) != string::npos) {
-                cout << "Surname: " << arr[i].NAME << ", Group: " << arr[i].GROUP << " | AVG : " << getAVG(arr[i]) << "\n";
-                found = true;
-            }
+        if (!arr[i].NAME.empty() && vowels.find(toupper(arr[i].NAME[0])) != string::npos) {
+            cout << "Surname: " << arr[i].NAME << ", Group: " << arr[i].GROUP << " | AVG : " << getAVG(arr[i]) << "\n";
+            found = true;
         }
     }
     if (!found) {
@@ -65,16 +65,16 @@ void printVowelStudents(Student arr[], int n) {
 void sortStudents(Student arr[], int n) {
     for (int i = 0; i < n - 1; i++) {
         for (int j = 0; j < n - i - 1; j++) {
-            if (getAVG(arr[j]) > getAVG(arr[j+1])) {
+            if (getAVG(arr[j]) > getAVG(arr[j + 1])) {
                 Student temp = arr[j];
-                arr[j] = arr[j+1];
-                arr[j+1] = temp;
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
         }
     }
 }
 
-void deleteAfterMin(Student*& arr, int& n) {
+void deleteAfterMin(Student *&arr, int &n) {
     if (n <= 1) {
         cout << "Not enough elements to delete\n";
         return;
@@ -97,7 +97,7 @@ void deleteAfterMin(Student*& arr, int& n) {
         cout << "Deleting this student: " << arr[deleteIndex].NAME << "\n\n";
 
         for (int i = deleteIndex; i < n - 1; i++) {
-            arr[i] = arr[i+1];
+            arr[i] = arr[i + 1];
         }
         n--;
     } else {
@@ -109,7 +109,7 @@ void clearConsole() {
     system("clear");
 }
 
-int main () {
+int main() {
     int n;
     cout << "Enter (n) Students: ";
     cin >> n;
@@ -119,10 +119,10 @@ int main () {
         return 0;
     }
 
-    Student* students = new Student[n];
+    Student *students = new Student[n];
 
     for (int i = 0; i < n; i++) {
-        cout << "\n--- Enter students data " << i+1 << " ---\n";
+        cout << "\n--- Enter students data " << i + 1 << " ---\n";
         cout << "Surname: ";
         getline(cin >> ws, students[i].NAME);
 
