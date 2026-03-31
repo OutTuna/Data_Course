@@ -48,14 +48,14 @@ double getAverage(Node *head) {
 // deleting first parne (evens)
 void deleteFirstEven(Node *&head) {
     if (!head) return;
-    // if first element is a even
+    // if first element is an even
     if (head->data % 2 == 0) {
         Node *temp = head;
         head = head->next;
         delete temp;
         return;
     }
-    // checking if next element is a even
+    // checking if next element is an even
     Node *current = head;
     while (current->next && current->next->data % 2 != 0) {
         current = current->next;
