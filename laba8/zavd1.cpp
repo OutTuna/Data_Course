@@ -6,6 +6,7 @@ struct StackNode {
     StackNode *next;
 } *first;
 
+// main logic: grades stack
 int main() {
     int n;
     first = 0;
@@ -13,6 +14,8 @@ int main() {
 
     cout << "Enter number of grades: ";
     cin >> n;
+
+    // push grades into the stack
 
     for (int i = 0; i < n; i++) {
         StackNode *c = new StackNode;
@@ -27,6 +30,8 @@ int main() {
     int count = 0;
     q = first;
 
+    // traverse stack to calculate sum and count
+
     while (q != 0) {
         cout << q->grade << " ";
         sum += q->grade;
@@ -40,6 +45,7 @@ int main() {
     }
 
     cout << "\nDeleting stack elements...\n";
+    // empty stack and free memory
     while (first != 0) {
         q = first;
         first = first->next;

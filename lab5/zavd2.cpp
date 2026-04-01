@@ -9,11 +9,13 @@ struct CityNode {
     CityNode *next;
 };
 
+// adds city node to list
 void addCity(CityNode *&head, string name, double distance) {
     CityNode *newNode = new CityNode{name, distance, head};
     head = newNode;
 }
 
+// finds top two furthest cities
 void printTwoFurthestCities(CityNode *head) {
     if (!head || !head->next) {
         cout << "Doesn't enough cities in a list" << endl;
@@ -22,6 +24,8 @@ void printTwoFurthestCities(CityNode *head) {
 
     CityNode *furthest1 = nullptr, *furthest2 = nullptr;
     double max1 = -1, max2 = -1;
+
+    // traverse to find max distances
 
     for (CityNode *temp = head; temp != nullptr; temp = temp->next) {
         if (temp->distance > max1) {
@@ -40,6 +44,7 @@ void printTwoFurthestCities(CityNode *head) {
     cout << "2. " << furthest2->name << " (" << furthest2->distance << " km)\n";
 }
 
+// frees allocated memory for list
 void freeCitiesList(CityNode *&head) {
     while (head) {
         CityNode *temp = head;
@@ -48,12 +53,15 @@ void freeCitiesList(CityNode *&head) {
     }
 }
 
+// main program logic
 int main() {
     CityNode *cities = nullptr;
     int n;
 
     cout << "Enter amount of cities: ";
     cin >> n;
+
+    // loop to read all cities
 
     for (int i = 0; i < n; ++i) {
         string name;

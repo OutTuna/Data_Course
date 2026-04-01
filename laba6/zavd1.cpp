@@ -8,11 +8,14 @@ struct StackNode {
     StackNode *next;
 } *first, *newFirst;
 
+// main logic: stack filtering
 int main() {
     srand(time(0));
     first = 0;
     newFirst = 0;
     StackNode *q;
+
+    // generate 10 random float numbers for stack
 
     for (int i = 0; i < 10; i++) {
         StackNode *c = new StackNode;
@@ -32,6 +35,8 @@ int main() {
     float limit;
     cout << "Enter limit value for deletion: ";
     cin >> limit;
+
+    // filter stack based on user limit
 
     while (first != 0) {
         q = first;
@@ -59,6 +64,8 @@ int main() {
     if (count > 0) {
         cout << "Average of new stack: " << sum / count << '\n';
     }
+
+    // clean up memory for new stack
 
     while (newFirst != 0) {
         q = newFirst;

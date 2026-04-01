@@ -10,15 +10,18 @@ struct CarNode {
     CarNode *next;
 };
 
+// adds car to list
 void addCar(CarNode *&head, string model, int year, double price) {
     CarNode *newNode = new CarNode{model, year, price, head};
     head = newNode;
 }
 
+// filters and prints cars
 void printFilteredCars(CarNode *head, int currentYear) {
     cout << "Cars older than 10 year and cheaper than 5000$:\n";
     bool found = false;
     for (CarNode *temp = head; temp != nullptr; temp = temp->next) {
+        // check if car is older than 10 years and under $5000
         if ((currentYear - temp->year > 10) && (temp->price < 5000)) {
             cout << "- " << temp->model << " (" << temp->year << "), price: " << temp->price << " $\n";
             found = true;
@@ -29,6 +32,7 @@ void printFilteredCars(CarNode *head, int currentYear) {
     }
 }
 
+// frees allocated memory for list
 void freeCarsList(CarNode *&head) {
     while (head) {
         CarNode *temp = head;
@@ -37,6 +41,7 @@ void freeCarsList(CarNode *&head) {
     }
 }
 
+// main program logic
 int main() {
     CarNode *cars = nullptr;
     int currentYear = 2026;
@@ -44,6 +49,7 @@ int main() {
 
     cout << "Enter amount of cars: ";
     cin >> n;
+    // read car details from user
     for (int i = 0; i < n; ++i) {
         string model;
         int year;

@@ -7,34 +7,36 @@ struct Node {
     Node *next;
 };
 
-// adding on start
+// adds element to the beginning
 void pushFront(Node *&head, int value) {
     Node *newNode = new Node{value, head};
     head = newNode;
 }
 
-// adding on end
+// adds element to the end
 void pushBack(Node *&head, int value) {
     Node *newNode = new Node{value, nullptr};
+    // check if list is empty
     if (!head) {
         head = newNode;
         return;
     }
     Node *temp = head;
+    // traverse to the last node
     while (temp->next) {
         temp = temp->next;
     }
     temp->next = newNode;
 }
 
-// enter in middle
+// inserts after specified node
 void insertAfter(Node *prevNode, int value) {
     if (!prevNode) return;
     Node *newNode = new Node{value, prevNode->next};
     prevNode->next = newNode;
 }
 
-// avg
+// calculates list average
 double getAverage(Node *head) {
     if (!head) return 0;
     int sum = 0, count = 0;
@@ -45,10 +47,11 @@ double getAverage(Node *head) {
     return static_cast<double>(sum) / count;
 }
 
-// deleting first even
+// removes first even number
 void deleteFirstEven(Node *&head) {
     if (!head) return;
     // if first element is an even
+    // check if the first element is even
     if (head->data % 2 == 0) {
         Node *temp = head;
         head = head->next;
@@ -68,7 +71,7 @@ void deleteFirstEven(Node *&head) {
     }
 }
 
-// user-enter
+// prints list elements to screen
 void printList(Node const *head) {
     while (head) {
         cout << head->data << " ";
@@ -77,7 +80,7 @@ void printList(Node const *head) {
     cout << endl;
 }
 
-// clearing space
+// frees allocated memory for list
 void freeList(Node *&head) {
     while (head) {
         Node *temp = head;
@@ -86,12 +89,15 @@ void freeList(Node *&head) {
     }
 }
 
+// main program logic
 int main() {
     Node *list = nullptr;
     int val1, val2, val3, val4;
 
     cout << "enter 4 numbers:\n";
     cin >> val1 >> val2 >> val3 >> val4;
+
+    // populate the list
 
     pushFront(list, val1);
     pushBack(list, val2);

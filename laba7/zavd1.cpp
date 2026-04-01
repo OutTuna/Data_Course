@@ -9,6 +9,7 @@ struct Weather {
     Weather *next;
 } *first1, *last1, *first2, *last2;
 
+// main logic: list merging
 int main() {
     int n1, n2;
     first1 = 0;
@@ -19,6 +20,7 @@ int main() {
 
     cout << "Enter number of days for the first month: ";
     cin >> n1;
+    // populate first month temperatures
     for (int i = 0; i < n1; i++) {
         Weather *c = new Weather;
         cout << "Enter date and temperature: ";
@@ -37,6 +39,7 @@ int main() {
 
     cout << "Enter number of days for the second month: ";
     cin >> n2;
+    // populate second month temperatures
     for (int i = 0; i < n2; i++) {
         Weather *c = new Weather;
         cout << "Enter date and temperature: ";
@@ -53,6 +56,8 @@ int main() {
         }
     }
 
+    // merge the two doubly linked lists
+
     if (first1 != 0 && first2 != 0) {
         last1->next = first2;
         first2->prev = last1;
@@ -66,6 +71,8 @@ int main() {
     q = first1;
     float maxTemp = -9999.0;
     float minTemp = 9999.0;
+
+    // find max and min temperatures in merged list
 
     while (q != 0) {
         cout << q->date << " : " << q->temp << '\n';

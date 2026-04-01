@@ -9,6 +9,7 @@ struct Team {
     Team *next;
 } *first, *last, *cityFirst, *cityLast, *pointsFirst, *pointsLast, *tempFirst, *tempLast;
 
+// main logic: team tracking
 int main() {
     int n;
     cout << "Enter number of teams: ";
@@ -22,6 +23,8 @@ int main() {
     tempFirst = 0;
     tempLast = 0;
     Team *q;
+
+    // read team data and add to initial queue
 
     for (int i = 0; i < n; i++) {
         Team *c = new Team;
@@ -54,6 +57,8 @@ int main() {
 
     Team *leader = first;
     Team *outsider = first;
+
+    // analyze teams and form new queues
 
     while (first != 0) {
         q = first;

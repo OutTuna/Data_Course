@@ -10,6 +10,7 @@ struct Employee {
     Employee *next;
 } *first, *last, *highFirst, *highLast, *lowFirst, *lowLast;
 
+// main logic: employee processing
 int main() {
     int n;
     first = 0;
@@ -24,6 +25,8 @@ int main() {
     cin >> n;
 
     float totalSalary = 0;
+
+    // enter employee data and calculate total salary
 
     for (int i = 0; i < n; i++) {
         Employee *c = new Employee;
@@ -46,6 +49,8 @@ int main() {
     float avgSalary = 0;
     if (n > 0) avgSalary = totalSalary / n;
     cout << "\nAverage salary: " << avgSalary << "\n\n";
+
+    // split list into high and low salary
 
     while (first != 0) {
         q = first;

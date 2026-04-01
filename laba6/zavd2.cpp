@@ -12,10 +12,13 @@ struct Music {
     Music *next;
 } *first, *newFirst;
 
+// main logic: music catalog
 int main() {
     first = 0;
     newFirst = 0;
     Music *q;
+
+    // add 4 music records to stack
 
     for (int i = 0; i < 4; i++) {
         Music *c = new Music;
@@ -40,6 +43,8 @@ int main() {
 
     int totalTime = 0;
 
+    // process stack elements
+
     while (first != 0) {
         q = first;
         first = first->next;
@@ -47,6 +52,8 @@ int main() {
         if (q->artist == targetArtist) {
             totalTime += q->time;
         }
+
+        // keep only cassettes (media type 2)
 
         if (q->media == 2) {
             q->next = newFirst;

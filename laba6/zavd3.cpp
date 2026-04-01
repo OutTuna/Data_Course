@@ -9,6 +9,7 @@ struct QueueNode {
     QueueNode *next;
 } *first, *last, *newFirst, *newLast;
 
+// main logic: queue processing
 int main() {
     srand(time(0));
     first = 0;
@@ -16,6 +17,8 @@ int main() {
     newFirst = 0;
     newLast = 0;
     QueueNode *q;
+
+    // generate initial queue of 5 elements
 
     for (int i = 0; i < 5; i++) {
         QueueNode *c = new QueueNode;
@@ -41,6 +44,8 @@ int main() {
     double product = 1.0;
     int count = 0;
 
+    // process initial queue into new queue
+
     while (first != 0) {
         q = first;
         first = first->next;
@@ -55,6 +60,8 @@ int main() {
 
         product *= q->v;
         count++;
+
+        // insert 100 after even numbers
 
         if (q->v % 2 == 0) {
             QueueNode *c100 = new QueueNode;

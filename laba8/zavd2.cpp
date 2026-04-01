@@ -10,6 +10,7 @@ struct Course {
     Course *next;
 } *first, *last, *popFirst, *popLast, *regFirst, *regLast;
 
+// main logic: popular courses
 int main() {
     int n;
     first = 0;
@@ -24,6 +25,8 @@ int main() {
     cin >> n;
 
     float totalAttendees = 0;
+
+    // read courses and calculate total attendees
 
     for (int i = 0; i < n; i++) {
         Course *c = new Course;
@@ -46,6 +49,8 @@ int main() {
     float avgAttendees = 0;
     if (n > 0) avgAttendees = totalAttendees / n;
     cout << "\nAverage attendees: " << avgAttendees << "\n\n";
+
+    // split courses into popular and regular lists
 
     while (first != 0) {
         q = first;
