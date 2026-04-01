@@ -45,7 +45,7 @@ double getAverage(Node *head) {
     return static_cast<double>(sum) / count;
 }
 
-// deleting first parne (evens)
+// deleting first even
 void deleteFirstEven(Node *&head) {
     if (!head) return;
     // if first element is an even
@@ -69,7 +69,7 @@ void deleteFirstEven(Node *&head) {
 }
 
 // user-enter
-void printList(Node *head) {
+void printList(Node const *head) {
     while (head) {
         cout << head->data << " ";
         head = head->next;
