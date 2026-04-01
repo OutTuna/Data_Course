@@ -12,6 +12,7 @@ bool checkMultiplicity(int n) {
         return false;
     }
 }
+
 //filling Array -1.5 to 4.5
 void generateArray(double A[], int n) {
     for (int i = 0; i < n; i = i + 1) {
@@ -20,6 +21,7 @@ void generateArray(double A[], int n) {
         A[i] = random_val / 100.0;
     }
 }
+
 //output Array
 void printArray(double A[], int n) {
     for (int i = 0; i < n; i = i + 1) {
@@ -27,10 +29,11 @@ void printArray(double A[], int n) {
     }
     cout << "\n";
 }
+
 //Matrix n/4
-double** createMatrix(double A[], int n) {
+double **createMatrix(double A[], int n) {
     int rows = n / 4;
-    double** B = new double*[rows];
+    double **B = new double *[rows];
     int index = 0;
 
     for (int i = 0; i < rows; i = i + 1) {
@@ -42,6 +45,7 @@ double** createMatrix(double A[], int n) {
     }
     return B;
 }
+
 //bublesort which ascending
 void bubbleSortAscending(double arr[], int n) {
     for (int i = 0; i < n - 1; i = i + 1) {
@@ -54,6 +58,7 @@ void bubbleSortAscending(double arr[], int n) {
         }
     }
 }
+
 //bublesort which descending
 void bubbleSortDescending(double arr[], int n) {
     for (int i = 0; i < n - 1; i = i + 1) {
@@ -66,6 +71,7 @@ void bubbleSortDescending(double arr[], int n) {
         }
     }
 }
+
 // find Max
 double findMax(double arr[], int n) {
     double max_val = arr[0];
@@ -76,18 +82,19 @@ double findMax(double arr[], int n) {
     }
     return max_val;
 }
+
 //main logic
-void processLab1(int n, ofstream& outFile, int testNum) {
+void processLab1(int n, ofstream &outFile, int testNum) {
     if (checkMultiplicity(n) == false) {
         return;
     }
-//timer start
+    //timer start
     clock_t start_time = clock();
 
-    double* A = new double[n];
+    double *A = new double[n];
     generateArray(A, n);
 
-    double** B = createMatrix(A, n);
+    double **B = createMatrix(A, n);
     int rows = n / 4;
 
     for (int i = 0; i < rows; i = i + 1) {
@@ -100,19 +107,19 @@ void processLab1(int n, ofstream& outFile, int testNum) {
 
     double colMax[4];
     for (int j = 0; j < 4; j = j + 1) {
-        double* tempCol = new double[rows];
+        double *tempCol = new double[rows];
         for (int i = 0; i < rows; i = i + 1) {
             tempCol[i] = B[i][j];
         }
         colMax[j] = findMax(tempCol, rows);
         delete[] tempCol;
     }
-//timer stop + getting time
+    //timer stop + getting time
     clock_t end_time = clock();
-    double exec_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-    size_t space = (sizeof(double) * n) + (sizeof(double*) * rows) + (sizeof(double) * n);
+    double exec_time = (double) (end_time - start_time) / CLOCKS_PER_SEC;
+    size_t space = (sizeof(double) * n) + (sizeof(double *) * rows) + (sizeof(double) * n);
 
-//output
+    //output
     outFile << testNum << "|\t" << n << "\t" << exec_time << "\t" << space << "\n";
 
     for (int i = 0; i < rows; i = i + 1) {
@@ -128,7 +135,7 @@ int main() {
     ofstream outFile("output.txt");
     outFile << "The following table:\n";
     outFile << "N\tn\tTime, sec.\tSpace, byte\n";
-// n - is size of table
+    // n - is size of table
     processLab1(20, outFile, 1);
     processLab1(100, outFile, 2);
     processLab1(1000, outFile, 3);
