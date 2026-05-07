@@ -44,6 +44,7 @@ vector<Student> insertSortByGroup(vector<Student> arr) {
     return arr;
 }
 
+//string printArray(const vector<Student> &arr), need's test, idk why not work
 void printArray(const vector<Student> &arr) {
     cout << left << setw(15) << "Surname" << setw(8) << "Group"
             << setw(20) << "Grade" << setw(8) << "Avg" << "\n";
