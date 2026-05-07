@@ -7,28 +7,30 @@ using namespace std;
 
 struct Student {
     string surname;
-    int group, grades[4];
-    double avg;
+    int group{}, grades[4]{};
+    double avg{};
 };
 
-void calcAvg(vector<Student> &arr) {
+vector<Student> calcAvg(vector<Student> arr) {
     for (auto &s: arr) {
         int sum = 0;
         for (int i = 0; i < 4; i++)
             sum += s.grades[i];
         s.avg = sum / 4.0;
     }
+    return arr;
 }
 
-void bubbleSortByAvg(vector<Student> &arr) {
+vector<Student> bubbleSortByAvg(vector<Student> arr) {
     int n = arr.size();
     for (int i = 0; i < n - 1; i++)
         for (int j = 0; j < n - i - 1; j++)
             if (arr[j].avg > arr[j + 1].avg)
                 swap(arr[j], arr[j + 1]);
+    return arr;
 }
 
-void insertSortByAvg(vector<Student> &arr) {
+vector<Student> insertSortByGroup(vector<Student> arr) {
     int n = arr.size();
     for (int i = 1; i < n; i++) {
         Student key = arr[i];
@@ -39,14 +41,15 @@ void insertSortByAvg(vector<Student> &arr) {
         }
         arr[j + 1] = key;
     }
+    return arr;
 }
 
 void printArray(const vector<Student> &arr) {
-    cout << left << setw(15) << "Surname" << setw(8) << "Group" << setw(20) << "Grade" << setw(8) << "Avg" << "\n";
+    cout << left << setw(15) << "Surname" << setw(8) << "Group"
+            << setw(20) << "Grade" << setw(8) << "Avg" << "\n";
     cout << string(55, '-') << "\n";
     for (const auto &s: arr) {
-        cout << setw(15) << s.surname << setw(8) << s.group;
-        cout << "[";
+        cout << setw(15) << s.surname << setw(8) << s.group << "[";
         for (int i = 0; i < 4; i++) {
             cout << s.grades[i];
             if (i < 3) cout << ", ";
@@ -55,9 +58,9 @@ void printArray(const vector<Student> &arr) {
     }
 }
 
-vector<int> binSearchByAvg(vector<Student> &arr, double target) {
+vector<int> binSearchByAvg(const vector<Student> &arr, double target) {
     vector<int> result;
-    int lo = 0, hi = arr.size() - 1, mid = -1;
+    int lo = 0, hi = (int) arr.size() - 1, mid = -1;
 
     while (lo <= hi) {
         mid = (lo + hi) / 2;
@@ -86,43 +89,43 @@ int main() {
     cin.ignore();
 
     vector<Student> students(n);
-
     for (int i = 0; i < n; i++) {
-        cout << "\nStudent" << i + 1 << ":\n";
+        cout << "\nStudent " << i + 1 << ":\n";
         cout << " Surname: ";
         getline(cin, students[i].surname);
         cout << " Group: ";
         cin >> students[i].group;
-        cout << " Grade(4val): ";
+        cout << " Grades (4 values): ";
         for (int j = 0; j < 4; j++) {
             cin >> students[i].grades[j];
             cin.ignore();
         }
     }
-    calcAvg(students);
 
-    bubbleSortByAvg(students);
-    cout << "\n sorted by avg : \n";
-    printArray(students);
+    const auto withAvg = calcAvg(students);
+    const auto sortedByAvg = bubbleSortByAvg(withAvg);
+    const auto sortedByGrp = insertSortByGroup(withAvg);
 
-    vector<Student> copy = students;
-    insertSortByAvg(copy);
-    cout << "\n sorted by group number : \n";
-    printArray(copy);
+    cout << "\nSorted by avg:\n";
+    printArray(sortedByAvg);
+
+    cout << "\nSorted by group:\n";
+    printArray(sortedByGrp);
 
     double target;
-    cout << "\n Enter average grade to search: ";
+    cout << "\nEnter average grade to search: ";
     cin >> target;
 
-    vector<int> found = binSearchByAvg(students, target);
+    const auto found = binSearchByAvg(sortedByAvg, target);
 
     if (found.empty()) {
-        cout << "Non with AVG" << target << "\n";
+        cout << "None with avg " << target << "\n";
     } else {
-        cout << "Found studs with avg : " << target << ":\n";
+        cout << "Found students with avg " << target << ":\n";
         for (int idx: found)
-            cout << " " << students[idx].surname << " | Group: " << students[idx].group << " | Avg: " << students[idx].
-                    avg << "\n";
+            cout << " " << sortedByAvg[idx].surname
+                    << " | Group: " << sortedByAvg[idx].group
+                    << " | Avg: " << sortedByAvg[idx].avg << "\n";
     }
 
     return 0;
